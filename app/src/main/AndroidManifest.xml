@@ -14,6 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCSE226">
         <activity
+            android:name=".Unit1.topCompanies.FullStackTopCompanies"
+            android:exported="false" />
+        <activity
+            android:name=".Unit1.topCompanies.ReactTopCompanies"
+            android:exported="false" />
+        <activity
+            android:name=".Unit1.topCompanies.IosTopCompanies"
+            android:exported="false" />
+        <activity
+            android:name=".Unit1.topCompanies.AndroidTopCompanies"
+            android:exported="false" />
+        <activity
+            android:name=".Unit1.topCompanies.TopCompainesDashboard"
+            android:exported="true" />
+        <activity
             android:name=".Unit1.listViewCricketDasboard.Dashboard"
             android:exported="true" />
         <activity
