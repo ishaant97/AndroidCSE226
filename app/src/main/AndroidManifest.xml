@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCSE226">
+        <activity
+            android:name=".Unit1.listViewCricketDasboard.Dashboard"
+            android:exported="true" />
         <activity
             android:name=".Unit1.cricketHomePageAssignment.CricketerDashboard"
             android:exported="true" />
