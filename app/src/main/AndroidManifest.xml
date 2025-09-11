@@ -14,17 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCSE226">
         <activity
+            android:name=".Unit2.Coroutines"
+            android:exported="true" />
+        <activity
             android:name=".Unit1.topCompanies.FullStackTopCompanies"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Unit1.topCompanies.ReactTopCompanies"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Unit1.topCompanies.IosTopCompanies"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Unit1.topCompanies.AndroidTopCompanies"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Unit1.topCompanies.TopCompainesDashboard"
             android:exported="true" />
