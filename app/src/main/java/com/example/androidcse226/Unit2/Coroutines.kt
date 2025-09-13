@@ -25,15 +25,25 @@ class Coroutines : AppCompatActivity() {
             insets
         }
 
-        val btn = findViewById<Button>(R.id.btn)
         val txtView = findViewById<TextView>(R.id.txt_view)
+        val startCoroutineBtn = findViewById<Button>(R.id.startCoroutineBtn)
+        val startWithTimeoutBtn = findViewById<Button>(R.id.startWithTimeoutBtn)
+        val startCancellableBtn = findViewById<Button>(R.id.startCancellableBtn)
+        val cancelBtn = findViewById<Button>(R.id.cancelBtn)
+        val collectFlowBtn = findViewById<Button>(R.id.collectFlowBtn)
+        val collectTwiceBtn = findViewById<Button>(R.id.collectTwiceBtn)
 
-        viewModel.result.observe(this, Observer { resultText ->
+        // Observe LiveData
+        viewModel.data.observe(this, Observer { resultText ->
             txtView.text = resultText
         })
 
-        btn.setOnClickListener {
-            viewModel.startWork()
-        }
+        // Button listeners
+        startCoroutineBtn.setOnClickListener { viewModel.startWork() }
+        startWithTimeoutBtn.setOnClickListener { viewModel.startWithTimeout() }
+        startCancellableBtn.setOnClickListener { viewModel.startCancellableWork() }
+        cancelBtn.setOnClickListener { viewModel.cancelWork() }
+        collectFlowBtn.setOnClickListener { viewModel.collectFlow() }
+        collectTwiceBtn.setOnClickListener { viewModel.collectTwice() }
     }
 }

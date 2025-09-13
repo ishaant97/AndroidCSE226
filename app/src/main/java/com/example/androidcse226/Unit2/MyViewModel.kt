@@ -5,66 +5,115 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+
 
 class MyViewModel: ViewModel() {
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String> = _result
+    private val _data = MutableLiveData<String>()
+    val data: LiveData<String> = _data
 
-    private suspend fun fetchData(): String = withContext(Dispatchers.IO) {
+    // ------------------------
+    // 1. Suspending Function + Context Switching
+    // ------------------------
+    private suspend fun fetchData():String = withContext(Dispatchers.IO){
         delay(1000)
-        return@withContext  "Hello from suspend"
+        return@withContext "Hello From Suspend Function!"
     }
 
-    fun startWork() {
-        viewModelScope.launch {
-            try {
-                _result.value = "Starting..."
+    fun startWork(){
+        viewModelScope.launch{
+            try{
+                _data.value = "Starting..."
                 val data = fetchData()
-                _result.value = "Fetched data $data"
-            } catch (e: Exception) {
-                _result.value = "Error: ${e.message}"
+                _data.value = "Fetched Data -> ${data}"
+            }catch(e:Exception){
+                _data.value = "Error -> ${e.message}"
             }
         }
     }
 
-    fun startWithTimeout() {
-        viewModelScope.launch {
-            try {
-                val result = withTimeout(1500) {
-                    delay(1000)
-                    "Completed before timeout"
+    // ------------------------
+    // 2. Timeout + Exception Handling
+    // ------------------------
+    fun startWithTimeout(){
+        viewModelScope.launch{
+            try{
+                val data = withTimeout(1500){
+                    delay(2000)
+                    "Completed before Timeout"
                 }
-
-                _result.value = result
-            } catch (e: TimeoutCancellationException) {
-                _result.value = "Timeout!"
+                _data.value = data
+            }catch (e: TimeoutCancellationException){
+                _data.value = "Timed Out"
             }
         }
     }
-    private fun collectFlow() {
-        viewModelScope.launch {
-            createFlow().onEach {
-                _result.value = it
-            }.collect()
+
+    // ------------------------
+    // 3. Manual Cancellation with Job
+    // ------------------------
+    private var job: Job? = null
+
+    fun startCancellableWork() {
+        job = viewModelScope.launch {
+            repeat(5) { i ->
+                delay(500)
+                _data.value = "Working... step $i"
+            }
+            _data.value = "Work Completed"
         }
     }
 
-    private fun createFlow(): Flow<String> = flow{
-        emit("Flow Started")
+    fun cancelWork() {
+        job?.cancel()
+        _data.value = "Work Cancelled!"
+    }
+
+    // ------------------------
+    // 4. Flow + Operators + Cold Stream
+    // ------------------------
+    private fun createFlow(): Flow<Int> = flow {
+        emit(1)
         delay(500)
-        emit("Flow emitted value")
+        emit(2)
+        delay(500)
+        emit(3)
+    }
+
+    fun collectFlow() {
+        viewModelScope.launch {
+            createFlow()
+                .map { it * 2 }             // operator: transform values
+                .filter { it > 2 }          // operator: filter values
+                .onEach { _data.value = "Flow emitted $it" }
+                .catch { e -> _data.value = "Error in flow -> ${e.message}" } // exception handling
+                .collect()
+        }
+    }
+
+    // Demonstrating Cold Stream (flow restarts for each collector)
+    fun collectTwice() {
+        viewModelScope.launch {
+            createFlow().collect { _data.value = "Collector1 -> $it" }
+            createFlow().collect { _data.value = "Collector2 -> $it" }
+        }
     }
 
     override fun onCleared() {
         super.onCleared()
+        job?.cancel()
     }
+
 }
