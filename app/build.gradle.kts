@@ -1,6 +1,10 @@
+import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.20-1.0.13"
 }
 
 android {
@@ -45,8 +49,23 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.viewmodel)
+
+    implementation(libs.androidx.cardview)
+
+    //Room
+//    implementation(libs.androidx.room.ktx)
+//    implementation(libs.androidx.room.runtime)
+//    ksp(libs.androidx.room.compiler)
+
+    //room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler) // <--- change from kapt to ksp
+
 }

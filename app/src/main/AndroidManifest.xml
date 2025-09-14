@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidCSE226">
+        android:theme="@style/Theme.ProductDownloader">
+        <activity
+            android:name=".Unit4.RoomDatabase.CrudMainPage"
+            android:exported="true" />
+
+        <activity
+            android:name=".Unit3.ProductDownloader.ProductMainPage"
+            android:exported="true" />
         <activity
             android:name=".Unit2.Coroutines"
             android:exported="true" />
@@ -49,6 +57,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        Download Services for product downloader-->
+        <service
+            android:name=".Unit3.ProductDownloader.DownloadService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import com.example.androidcse226.R
 
 
 class CricketAdapter(private val cricketers:List<CricketerData>):
-    _root_ide_package_.androidx.recyclerview.widget.RecyclerView.Adapter<CricketAdapter.CricketerViewHolder>() {
+    RecyclerView.Adapter<CricketAdapter.CricketerViewHolder>() {
     class CricketerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tvName)
         val country: TextView = itemView.findViewById(R.id.tvCountry)
