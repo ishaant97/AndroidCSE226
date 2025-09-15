@@ -19,6 +19,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MAPS_API_KEY"] = project.findProperty("MAPS_API_KEY") ?: ""
     }
 
     buildTypes {
@@ -63,6 +64,13 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler) // <--- change from kapt to ksp
 
-//    Locations services
+    //Locations services
     implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    //Google maps services
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+
+    //okhttp for api calling
+    implementation(libs.okhttp)
+
 }

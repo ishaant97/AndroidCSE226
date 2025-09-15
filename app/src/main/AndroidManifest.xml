@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductDownloader">
         <activity
+            android:name=".Unit5.GoogleMaps.GoogleMapsActivity"
+            android:exported="true" />
+        <activity
             android:name=".Unit5.FusedLocationContineous.MainPage"
             android:exported="true" />
         <activity
@@ -71,6 +74,10 @@
             android:name=".Unit3.ProductDownloader.DownloadService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>
