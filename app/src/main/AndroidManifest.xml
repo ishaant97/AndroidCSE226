@@ -15,9 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductDownloader">
         <activity
+            android:name=".Unit4.SqlLite.SqlLiteMainPage"
+            android:exported="true" />
+        <activity
             android:name=".Unit4.RoomDatabase.CrudMainPage"
             android:exported="true" />
-
         <activity
             android:name=".Unit3.ProductDownloader.ProductMainPage"
             android:exported="true" />
@@ -56,9 +58,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-<!--        Download Services for product downloader-->
+        </activity> <!-- Download Services for product downloader -->
         <service
             android:name=".Unit3.ProductDownloader.DownloadService"
             android:exported="false"
