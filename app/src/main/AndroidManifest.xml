@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductDownloader">
         <activity
+            android:name=".Unit5.FusedLocationContineous.MainPage"
+            android:exported="true" />
+        <activity
             android:name=".Unit5.FusedLocation.MainActivity"
             android:exported="true" />
         <activity
