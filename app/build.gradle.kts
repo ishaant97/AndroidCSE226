@@ -58,14 +58,11 @@ dependencies {
 
     implementation(libs.androidx.cardview)
 
-    //Room
-//    implementation(libs.androidx.room.ktx)
-//    implementation(libs.androidx.room.runtime)
-//    ksp(libs.androidx.room.compiler)
-
     //room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler) // <--- change from kapt to ksp
 
+//    Locations services
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }
