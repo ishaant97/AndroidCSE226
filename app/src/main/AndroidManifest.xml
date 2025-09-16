@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductDownloader">
         <activity
+            android:name=".Unit6.TestingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Unit6.CalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".Unit3.BoundService.BoundMainPage"
             android:exported="true" />
         <activity
