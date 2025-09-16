@@ -7,6 +7,12 @@
     android:padding="20dp">
 
     <Button
+        android:id="@+id/btnGetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Location" />
+
+    <Button
         android:id="@+id/btnStartUpdates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

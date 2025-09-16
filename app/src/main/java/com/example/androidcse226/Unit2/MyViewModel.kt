@@ -107,6 +107,7 @@ class MyViewModel: ViewModel() {
     fun collectTwice() {
         viewModelScope.launch {
             createFlow().collect { _data.value = "Collector1 -> $it" }
+            delay(1000)
             createFlow().collect { _data.value = "Collector2 -> $it" }
         }
     }

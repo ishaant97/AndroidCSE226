@@ -65,10 +65,10 @@ dependencies {
     ksp(libs.androidx.room.compiler) // <--- change from kapt to ksp
 
     //Locations services
-    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation(libs.play.services.location)
 
     //Google maps services
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation(libs.play.services.maps)
 
     //okhttp for api calling
     implementation(libs.okhttp)
